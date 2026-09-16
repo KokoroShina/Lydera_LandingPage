@@ -31,7 +31,7 @@ function Users() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-[0.18em] text-slate-400">
+            <span className="text-xs font-semibold tracking-[0.18em] text-[var(--lydera-primary)]">
               WHO IS IT FOR?
             </span>
 
@@ -49,13 +49,13 @@ function Users() {
 
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
           <Reveal direction="left">
-            <article className="group h-full rounded-[2rem] border border-slate-200 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-xl hover:shadow-slate-950/5 sm:p-10">
+            <article className="group h-full rounded-[2rem] border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--lydera-primary)] hover:bg-[var(--lydera-primary-soft)] hover:shadow-xl hover:shadow-[var(--lydera-primary)/5] sm:p-10">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-400">
+                <span className="text-sm font-semibold text-[var(--lydera-primary)]">
                   {users[0].number}
                 </span>
 
-                <span className="text-sm font-medium text-slate-400 transition-transform duration-300 group-hover:translate-x-1">
+                <span className="text-sm font-medium text-[var(--lydera-primary)] transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
               </div>
@@ -76,7 +76,7 @@ function Users() {
                     key={point}
                     className="flex items-start gap-3 text-sm leading-6 text-slate-700"
                   >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--lydera-primary)]" />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -85,13 +85,13 @@ function Users() {
           </Reveal>
 
           <Reveal direction="right" delay={150}>
-            <article className="group h-full rounded-[2rem] border border-slate-200 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-xl hover:shadow-slate-950/5 sm:p-10">
+            <article className="group h-full rounded-[2rem] border border-slate-200 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--lydera-primary)] hover:bg-[var(--lydera-primary-soft)] hover:shadow-xl hover:shadow-[var(--lydera-primary)/5] sm:p-10">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-400">
+                <span className="text-sm font-semibold text-slate-400 group-hover:text-[var(--lydera-primary)] transition-colors duration-300">
                   {users[1].number}
                 </span>
 
-                <span className="text-sm font-medium text-slate-400 transition-transform duration-300 group-hover:translate-x-1">
+                <span className="text-sm font-medium text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[var(--lydera-primary)]">
                   →
                 </span>
               </div>
@@ -112,7 +112,7 @@ function Users() {
                     key={point}
                     className="flex items-start gap-3 text-sm leading-6 text-slate-700"
                   >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--lydera-primary)]" />
                     <span>{point}</span>
                   </li>
                 ))}

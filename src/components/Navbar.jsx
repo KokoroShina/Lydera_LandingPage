@@ -54,7 +54,7 @@ function Navbar() {
           className="flex items-center gap-2.5"
           aria-label="Lydera - Home"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-lg font-bold text-white">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--lydera-primary)] text-lg font-bold text-white">
             L
           </div>
 
@@ -68,7 +68,7 @@ function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-slate-950"
+              className="text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-[var(--lydera-primary)]"
             >
               {item.label}
             </a>
@@ -77,7 +77,7 @@ function Navbar() {
 
         <a
           href="#cta"
-          className="hidden rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-slate-800 hover:shadow-lg hover:shadow-slate-900/10 lg:inline-flex"
+          className="hidden rounded-full bg-[var(--lydera-primary)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)/10] lg:inline-flex"
         >
           Coba Sekarang
         </a>
@@ -145,7 +145,7 @@ function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className="border-b border-slate-100 py-3.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-950"
+                className="border-b border-slate-100 py-3.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-[var(--lydera-primary)]"
               >
                 {item.label}
               </a>
@@ -154,7 +154,7 @@ function Navbar() {
             <a
               href="#cta"
               onClick={closeMenu}
-              className="mt-5 inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-slate-800"
+              className="mt-5 inline-flex items-center justify-center rounded-full bg-[var(--lydera-primary)] px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)]"
             >
               Coba Sekarang
             </a>

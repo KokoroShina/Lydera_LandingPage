@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+:root {
+  --lydera-primary: #2563EB;
+  --lydera-primary-hover: #1D4ED8;
+  --lydera-primary-soft: #EFF6FF;
+  --lydera-primary-soft-hover: #DBEAFE;
+  --lydera-success: #10B981;
+  --lydera-text: #0F172A;
+  --lydera-text-secondary: #475569;
+  --lydera-bg: #FFFFFF;
+  --lydera-bg-soft: #F8FAFC;
+  --lydera-sidebar: #F8FAFC;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -24,7 +37,7 @@ body {
 }
 
 ::selection {
-  background: #0f172a;
+  background: var(--lydera-primary);
   color: white;
 }
 

@@ -54,7 +54,7 @@ function Benefits() {
 
         <div className="mt-14 grid gap-12 sm:mt-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-24">
           <Reveal direction="left">
-            <div className="relative overflow-hidden rounded-[2rem] bg-slate-100 p-7 sm:p-10">
+            <div className="relative overflow-hidden rounded-[2rem] bg-white p-7 sm:p-10">
               <div className="flex min-h-[390px] flex-col justify-between sm:min-h-[460px]">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm">
@@ -66,23 +66,33 @@ function Benefits() {
                   </span>
                 </div>
 
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-[var(--lydera-primary)] shadow-sm">
+                    LYDERA ECOSYSTEM
+                  </span>
+
+                  <span className="text-xs font-medium text-slate-400">
+                    2026
+                  </span>
+                </div>
+
                 <div className="relative flex flex-1 items-center justify-center">
                   <div className="absolute h-56 w-56 rounded-full bg-white sm:h-72 sm:w-72" />
 
-                  <div className="relative z-10 w-[220px] rounded-[2rem] border-[6px] border-slate-950 bg-slate-950 p-1.5 shadow-2xl shadow-slate-950/10 sm:w-[250px]">
-                    <div className="overflow-hidden rounded-[1.5rem] bg-slate-50">
+                  <div className="relative z-10 w-[220px] rounded-[2rem] border-[6px] border-[var(--lydera-primary-soft)] bg-[var(--lydera-primary-soft)] p-1.5 shadow-2xl shadow-[var(--lydera-primary)/10] sm:w-[250px]">
+                    <div className="overflow-hidden rounded-[1.5rem] bg-[var(--lydera-primary-soft)]">
                       <div className="px-4 pb-5 pt-10">
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="h-2 w-12 rounded-full bg-slate-200" />
-                            <div className="mt-2 h-3.5 w-20 rounded-full bg-slate-900" />
+                            <div className="h-2 w-12 rounded-full bg-[var(--lydera-primary)]" />
+                            <div className="mt-2 h-3.5 w-20 rounded-full bg-[var(--lydera-primary)]" />
                           </div>
 
-                          <div className="h-7 w-7 rounded-full bg-slate-200" />
+                          <div className="h-7 w-7 rounded-full bg-[var(--lydera-primary-soft)]" />
                         </div>
 
                         <div className="mt-5 rounded-2xl bg-white p-4 ring-1 ring-slate-100">
-                          <div className="h-2.5 w-20 rounded-full bg-slate-900" />
+                          <div className="<h-2.5 w-20 rounded-full bg-[var(--lydera-primary)]" />
 
                           <div className="mt-4 h-20 rounded-xl bg-slate-100">
                             <div className="mx-auto pt-6 text-center text-2xl font-semibold text-slate-300">

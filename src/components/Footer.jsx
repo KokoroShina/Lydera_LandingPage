@@ -45,7 +45,7 @@ function Footer() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-sm text-slate-400 transition-colors duration-200 hover:text-white"
+                    className="text-sm text-slate-400 transition-colors duration-200 hover:text-[var(--lydera-primary)]"
                   >
                     {link.label}
                   </a>
@@ -65,7 +65,7 @@ function Footer() {
 
               <a
                 href="#cta"
-                className="mt-5 inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:bg-slate-100"
+                className="mt-5 inline-flex items-center rounded-full bg-[var(--lydera-primary)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)]"
               >
                 Coba Sekarang
                 <span className="ml-2">→</span>

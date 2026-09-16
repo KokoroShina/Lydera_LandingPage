@@ -29,14 +29,14 @@ function FinalCTA() {
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="#"
-              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:bg-slate-100 hover:shadow-xl hover:shadow-white/10"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--lydera-primary)] px-7 py-3.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)/10]"
             >
               Coba Sekarang
             </a>
 
             <a
               href="#about"
-              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-slate-300 transition-colors duration-200 hover:text-white"
+              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-[var(--lydera-primary)] transition-colors duration-200 hover:text-[var(--lydera-primary)]"
             >
               Kenali Lydera
               <span className="ml-2">↑</span>

@@ -75,12 +75,12 @@ function FAQ() {
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${index}`}
                   >
-                    <span className="text-base font-semibold text-slate-900 sm:text-lg">
+                    <span className="text-base font-semibold text-slate-900 sm:text-lg hover:text-[var(--lydera-primary)] transition-colors">
                       {faq.question}
                     </span>
 
-                    <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 text-lg text-slate-600 transition-transform duration-300 ${
+<span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--lydera-primary)] text-[var(--lydera-primary)] transition-transform duration-300 ${
                         isOpen ? "rotate-45" : ""
                       }`}
                       aria-hidden="true"

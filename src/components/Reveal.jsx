@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-function Reveal({ children, className = "", delay = 0, direction = "up" }) {
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  direction = "up",
+}) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -17,7 +22,8 @@ function Reveal({ children, className = "", delay = 0, direction = "up" }) {
         }
       },
       {
-        threshold: 0.12,
+        threshold: 0,
+        rootMargin: "0px 0px -40px 0px",
       },
     );
 

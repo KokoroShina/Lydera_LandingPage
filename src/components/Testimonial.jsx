@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="bg-slate-50 py-24 sm:py-32">
+    <section id="testimonials" className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
         <Reveal>
           <div>
@@ -25,7 +25,7 @@ function Testimonials() {
         <Reveal delay={150}>
           <div className="mx-auto mt-14 max-w-3xl rounded-[2rem] border border-slate-200 bg-white p-8 text-left shadow-sm sm:p-10">
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-slate-900" />
+              <span className="h-2 w-2 rounded-full bg-[var(--lydera-primary)]" />
 
               <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
                 Coming from our pilot

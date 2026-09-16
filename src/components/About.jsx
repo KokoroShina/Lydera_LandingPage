@@ -24,7 +24,7 @@ function About() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-[0.18em] text-slate-500">
+            <span className="text-xs font-semibold tracking-[0.18em] text-[var(--lydera-primary)]">
               ABOUT US
             </span>
 
@@ -44,7 +44,7 @@ function About() {
         <div className="mt-16 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <Reveal direction="left">
             <div className="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200/80 sm:p-10">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-sm font-bold text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--lydera-primary-soft)] text-[var(--lydera-primary)] text-sm font-bold">
                 01
               </div>
 
@@ -73,7 +73,7 @@ function About() {
               <Reveal key={item.title} delay={index * 100} direction="right">
                 <div className="border-b border-slate-200 pb-5 last:border-b-0">
                   <div className="flex gap-4">
-                    <span className="pt-0.5 text-xs font-semibold text-slate-400">
+                    <span className="pt-0.5 text-xs font-semibold text-[var(--lydera-primary)]">
                       0{index + 1}
                     </span>
 
