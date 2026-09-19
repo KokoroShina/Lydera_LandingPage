@@ -1,180 +1,146 @@
 import Reveal from "./Reveal";
+import HeroFront from "../assets/hero/Hero_1.svg";
+import HeroBack from "../assets/hero/Hero_2.svg";
 
 function Hero() {
   return (
-    <section className="overflow-hidden bg-white">
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-16 px-6 py-20 lg:grid-cols-2 lg:px-8 lg:py-24">
+    <section
+      className="relative overflow-hidden bg-white"
+      aria-labelledby="hero-heading"
+    >
+      {/* Subtle background: soft blue glow + faint dot grid */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -left-32 top-1/4 h-[420px] w-[420px] rounded-full bg-[var(--lydera-primary)]/[0.07] blur-3xl" />
+
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgb(148 163 184 / 0.35) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            maskImage:
+              "radial-gradient(ellipse at 30% 50%, black 0%, transparent 65%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at 30% 50%, black 0%, transparent 65%)",
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-6 py-16 sm:gap-16 sm:py-20 lg:grid-cols-2 lg:px-8 lg:py-24">
+        {/* Text Column (Left) */}
         <Reveal direction="left">
-          <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center rounded-full border border-[var(--lydera-primary-soft)] bg-[var(--lydera-primary-soft)] px-4 py-2">
-              <span className="text-xs font-semibold tracking-[0.16em] text-[var(--lydera-primary)]">
-                INCLUSIVE AI LEARNING ECOSYSTEM
+          <div className="max-w-xl">
+            {/* Tiny eyebrow line */}
+            <div className="mb-6 inline-flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+
+              <span className="text-sm font-medium text-slate-600">
+                Built for visually impaired students
               </span>
             </div>
 
-            <h1 className="max-w-2xl text-5xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-              Accessible Math Learning,
-              <span className="block text-slate-500">Without Limits.</span>
+            <h1
+              id="hero-heading"
+              className="text-5xl font-bold leading-[1.05] tracking-tighter text-slate-950 sm:text-6xl lg:text-[4.25rem]"
+            >
+              Math learning,
+              <span className="block bg-gradient-to-r from-[var(--lydera-primary)] to-sky-500 bg-clip-text pb-1 text-transparent">
+                without visual barriers.
+              </span>
             </h1>
 
-            <p className="mt-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              Lydera adalah ekosistem pembelajaran matematika berbasis AI
-              yang dirancang untuk membuat proses belajar lebih mudah diakses,
-              interaktif, dan bermakna bagi siswa tunanetra serta guru dan
-              pendampingnya.
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-600 sm:text-lg">
+              An AI-powered learning ecosystem that turns math modules,
+              exercises, and evaluations into content that visually impaired
+              students and their teachers can access with ease.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
               <a
                 href="#cta"
-                className="inline-flex items-center justify-center rounded-full bg-[var(--lydera-primary)] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)/10]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--lydera-primary)] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[var(--lydera-primary)]/25 ring-1 ring-inset ring-white/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--lydera-primary-hover)] hover:shadow-xl hover:shadow-[var(--lydera-primary)]/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lydera-primary)]"
               >
-                Coba Sekarang
+                Try Lydera
+
+                <span
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
               </a>
 
               <a
                 href="#features"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold text-[var(--lydera-primary)] transition-colors duration-200 hover:text-[var(--lydera-primary)]"
+                className="group inline-flex items-center gap-3 text-sm font-semibold text-slate-800 transition-colors duration-200 hover:text-[var(--lydera-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--lydera-primary)]"
               >
-                Pelajari cara kerja Lydera
-                <span className="ml-2 transition-transform duration-200 group-hover:translate-y-0.5">
-                  ↓
+                <span
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[10px] text-[var(--lydera-primary)] shadow-sm transition-all duration-200 group-hover:border-[var(--lydera-primary)]/40 group-hover:shadow-md"
+                  aria-hidden="true"
+                >
+                  ▶
                 </span>
+
+                See how it works
               </a>
-            </div>
-
-            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-slate-100 pt-6">
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  Accessible by Design
-                </p>
-
-                <p className="mt-1 text-xs text-slate-500">
-                  Dibangun dengan aksesibilitas sebagai fondasi
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  AI-Powered Learning
-                </p>
-
-                <p className="mt-1 text-xs text-slate-500">
-                  Pembelajaran yang lebih adaptif
-                </p>
-              </div>
             </div>
           </div>
         </Reveal>
 
+        {/* Phone Mockup Column (Right) */}
         <Reveal direction="right" delay={150}>
-          <div className="relative flex items-center justify-center lg:justify-end">
-            <div className="absolute h-72 w-72 rounded-full bg-[var(--lydera-primary-soft)] blur-3xl sm:h-96 sm:w-96" />
+          <div
+            className="relative mx-auto flex items-center justify-center overflow-hidden rounded-[2rem] bg-[var(--lydera-primary)]"
+            style={{
+              height: "560px",
+              maxWidth: "480px",
+              width: "100%",
+              boxShadow: "0 18px 45px rgba(37, 99, 235, 0.18)",
+            }}
+          >
+            {/* Decorative stars */}
+            <div
+              className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]"
+              aria-hidden="true"
+            >
+              <span className="absolute left-6 top-8 text-xl text-white/20">
+                ✦
+              </span>
 
-            <div className="relative w-[260px] animate-hero-phone sm:w-[290px]">
-              <div className="rounded-[2.5rem] border-[8px] border-slate-950 bg-slate-950 p-1 shadow-2xl shadow-slate-950/20">
-                <div className="relative overflow-hidden rounded-[2rem] bg-white">
-                  <div className="absolute left-1/2 top-3 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-slate-950" />
+              <span className="absolute right-8 top-16 text-3xl text-white/25">
+                ✦
+              </span>
 
-                  <div className="min-h-[520px] bg-slate-50 px-5 pb-7 pt-14">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-xs text-slate-500">
-                          Selamat datang,
-                        </p>
+              <span className="absolute bottom-8 right-8 text-xl text-white/25">
+                ✦
+              </span>
+            </div>
 
-                        <p className="mt-1 text-lg font-bold text-slate-950">
-                          Lydera
-                        </p>
-                      </div>
+            {/* Phone mockups */}
+            <div
+              className="relative z-10 flex items-center justify-center"
+              style={{
+                width: "340px",
+                height: "460px",
+              }}
+            >
+              <div className="relative flex h-full w-full items-center justify-center">
+                {/* Back phone */}
+                <img
+                  src={HeroBack}
+                  alt="Lydera app screen on the back phone"
+                  className="relative z-0 w-full scale-[1.3] -translate-x-[-80%] rotate-[0deg] drop-shadow-[0_24px_30px_rgba(15,23,42,0.34)]"
+                />
 
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--lydera-primary)] text-xs font-bold text-white">
-                        L
-                      </div>
-                    </div>
-
-                    <div className="mt-7 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-100">
-                      <p className="text-xs font-medium text-slate-500">
-                        Sedang belajar
-                      </p>
-
-                      <h3 className="mt-2 text-lg font-bold text-slate-950">
-                        Matematika
-                      </h3>
-
-                      <div className="mt-5 h-2 overflow-hidden rounded-full bg-[var(--lydera-primary-soft)]">
-                        <div className="h-full w-3/5 rounded-full bg-[var(--lydera-primary)]" />
-                      </div>
-
-                      <div className="mt-3 flex justify-between text-xs text-slate-500">
-                        <span>Progress</span>
-                        <span>60%</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-100">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--lydera-primary-soft)] text-[var(--lydera-primary)] text-sm">
-                          AI
-                        </div>
-
-                        <div>
-                          <p className="text-sm font-semibold">
-                            Asisten Belajar
-                          </p>
-
-                          <p className="mt-0.5 text-xs text-slate-500">
-                            Siap membantu
-                          </p>
-                        </div>
-                      </div>
-
-                      <p className="mt-5 text-sm leading-6 text-slate-500">
-                        Ada yang ingin kamu pelajari hari ini?
-                      </p>
-                    </div>
-
-                    <div className="mt-4 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-100">
-                        <p className="text-xs font-medium text-slate-500">
-                          Latihan
-                        </p>
-
-                        <p className="mt-1 text-sm font-bold text-slate-900">
-                          12 Soal
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-100">
-                        <p className="text-xs font-medium text-slate-500">
-                          Modul
-                        </p>
-
-                        <p className="mt-1 text-sm font-bold text-slate-900">
-                          4 Materi
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -left-8 bottom-16 hidden animate-hero-badge rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lg shadow-slate-950/5 sm:block">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--lydera-primary-soft)] text-sm">
-                    ♿
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-slate-900">
-                      Accessibility
-                    </p>
-
-                    <p className="text-[11px] text-slate-500">
-                      Built for everyone
-                    </p>
-                  </div>
-                </div>
+                {/* Front phone */}
+                <img
+                  src={HeroFront}
+                  alt="Lydera app dashboard on the front phone"
+                  className="relative z-10 -ml-[37%] w-full scale-[1.3] translate-x-[-20%] rotate-[0deg] drop-shadow-[0_28px_36px_rgba(15,23,42,0.4)]"
+                />
               </div>
             </div>
           </div>

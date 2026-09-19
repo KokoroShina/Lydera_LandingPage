@@ -1,102 +1,158 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
 
+const faqs = [
+  {
+    question: "What is Lydera?",
+    answer:
+      "Lydera is an AI-powered math learning ecosystem that makes math easier to access for visually impaired students, and supports the teachers and companions who guide them.",
+  },
+  {
+    question: "Who can use Lydera?",
+    answer:
+      "Visually impaired students are the primary users, together with the teachers and companions involved in their learning.",
+  },
+  {
+    question: "Does it work with a screen reader?",
+    answer:
+      "Yes. Lydera has been used with TalkBack, and math notation is turned into text that can be read aloud clearly.",
+  },
+  {
+    question: "Which devices does Lydera support?",
+    answer: "Lydera is currently available for Android devices only.",
+  },
+  {
+    question: "Does Lydera use AI?",
+    answer:
+      "Yes. AI helps convert modules into accessible text, generate questions, evaluate answers step by step, and power the study assistant.",
+  },
+  {
+    question: "Who checks the AI?",
+    answer:
+      "Teachers do. They review and validate AI-generated modules and questions before anything reaches students.",
+  },
+  {
+    question: "Can teachers create their own questions?",
+    answer:
+      "Yes. Teachers can write questions from scratch, or generate them from a module and edit anything before publishing.",
+  },
+  {
+    question: "Can the chatbot answer everything?",
+    answer:
+      "No. It answers from teacher-curated modules first, with reliable external sources for extra context, so its answers depend on the materials available in the system.",
+  },
+];
+
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
-
-  const faqs = [
-    {
-      question: "Apa itu Lydera?",
-      answer:
-        "Lydera adalah ekosistem pembelajaran matematika berbasis AI yang dirancang untuk meningkatkan aksesibilitas bagi siswa tunanetra serta membantu guru dan pendamping dalam proses pembelajaran.",
-    },
-    {
-      question: "Siapa yang dapat menggunakan Lydera?",
-      answer:
-        "Lydera dirancang untuk siswa tunanetra sebagai pengguna utama, serta guru dan pendamping yang terlibat dalam proses pembelajaran.",
-    },
-    {
-      question: "Apakah Lydera menggunakan AI?",
-      answer:
-        "Ya. AI digunakan pada beberapa bagian ekosistem Lydera, seperti pembuatan soal, analisis hasil ujian, dan chatbot asisten belajar. Setiap fitur memiliki tujuan yang berbeda dalam mendukung proses pembelajaran.",
-    },
-    {
-      question: "Apakah Lydera dapat digunakan dengan screen reader?",
-      answer:
-        "Lydera dirancang dengan mempertimbangkan kebutuhan aksesibilitas, termasuk penggunaan screen reader dan format konten yang lebih mudah dinavigasi oleh pengguna tunanetra.",
-    },
-    {
-      question: "Apakah guru dapat membuat soal sendiri?",
-      answer:
-        "Ya. Guru dapat memanfaatkan fitur pembuatan soal otomatis untuk membantu menghasilkan latihan berdasarkan materi dan tingkat kognitif yang dibutuhkan, kemudian menyesuaikannya sesuai kebutuhan.",
-    },
-    {
-      question: "Apakah chatbot Lydera bisa menjawab semua pertanyaan?",
-      answer:
-        "Chatbot Lydera dirancang sebagai asisten belajar berbasis RAG yang menggunakan sumber pembelajaran relevan sebagai konteks jawaban. Karena itu, kemampuannya bergantung pada sumber dan materi yang tersedia di dalam sistem.",
-    },
-  ];
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+    <section
+      id="faq"
+      className="relative overflow-hidden bg-white py-24 sm:py-32"
+      aria-labelledby="faq-heading"
+    >
+      {/* Soft background glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute left-1/2 top-1/3 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-[var(--lydera-primary)]/[0.06] blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-6 lg:px-8">
+        {/* ── Header ── */}
         <Reveal>
           <div className="text-center">
-            <span className="text-xs font-semibold tracking-[0.18em] text-slate-400">
-              FAQ
-            </span>
+            <div className="mb-5 inline-flex items-center gap-2.5">
+              <span
+                className="h-2 w-2 rounded-full bg-[var(--lydera-primary)]"
+                aria-hidden="true"
+              />
+              <span className="text-sm font-medium text-slate-600">FAQ</span>
+            </div>
 
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              Questions, answered.
+            <h2
+              id="faq-heading"
+              className="text-4xl font-bold leading-[1.1] tracking-tighter text-slate-950 sm:text-5xl"
+            >
+              Questions,{" "}
+              <span className="bg-gradient-to-r from-[var(--lydera-primary)] to-sky-500 bg-clip-text text-transparent">
+                answered.
+              </span>
             </h2>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Beberapa hal yang mungkin ingin kamu ketahui sebelum mulai
-              mengenal Lydera lebih jauh.
+            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              A few things you might want to know before getting to know Lydera
+              better.
             </p>
           </div>
         </Reveal>
 
-        <Reveal delay={150}>
+        {/* ── Accordion ── */}
+        <Reveal delay={100}>
           <div className="mt-14 divide-y divide-slate-200 border-y border-slate-200">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
 
               return (
                 <div key={faq.question}>
-                  <button
-                    type="button"
-                    onClick={() => toggleFAQ(index)}
-                    className="flex w-full items-center justify-between gap-6 py-6 text-left"
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-answer-${index}`}
-                  >
-                    <span className="text-base font-semibold text-slate-900 sm:text-lg hover:text-[var(--lydera-primary)] transition-colors">
-                      {faq.question}
-                    </span>
-
-<span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--lydera-primary)] text-[var(--lydera-primary)] transition-transform duration-300 ${
-                        isOpen ? "rotate-45" : ""
-                      }`}
-                      aria-hidden="true"
+                  <h3>
+                    <button
+                      type="button"
+                      onClick={() => toggleFAQ(index)}
+                      className="group flex w-full items-center justify-between gap-6 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--lydera-primary)]"
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${index}`}
+                      id={`faq-question-${index}`}
                     >
-                      +
-                    </span>
-                  </button>
+                      <span
+                        className={`text-base font-semibold transition-colors duration-200 motion-reduce:transition-none sm:text-lg ${
+                          isOpen
+                            ? "text-[var(--lydera-primary)]"
+                            : "text-slate-900 group-hover:text-[var(--lydera-primary)]"
+                        }`}
+                      >
+                        {faq.question}
+                      </span>
+
+                      <span
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 motion-reduce:transition-none ${
+                          isOpen
+                            ? "rotate-45 border-[var(--lydera-primary)] bg-[var(--lydera-primary)] text-white"
+                            : "border-slate-300 text-slate-600 group-hover:border-[var(--lydera-primary)] group-hover:text-[var(--lydera-primary)]"
+                        }`}
+                        aria-hidden="true"
+                      >
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 4.5v15m7.5-7.5h-15"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  </h3>
 
                   <div
                     id={`faq-answer-${index}`}
-                    className={`grid transition-[grid-template-rows] duration-300 ${
+                    role="region"
+                    aria-labelledby={`faq-question-${index}`}
+                    inert={isOpen ? undefined : ""}
+                    className={`grid transition-[grid-template-rows] duration-300 motion-reduce:transition-none ${
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="max-w-3xl pb-6 pr-12 text-sm leading-7 text-slate-600 sm:text-base">
+                      <p className="max-w-2xl pb-6 pr-12 text-sm leading-7 text-slate-600 sm:text-base">
                         {faq.answer}
                       </p>
                     </div>
@@ -104,6 +160,32 @@ function FAQ() {
                 </div>
               );
             })}
+          </div>
+        </Reveal>
+
+        {/* ── Contact CTA ── */}
+        <Reveal delay={200}>
+          <div className="mt-12 flex flex-col items-center gap-4 rounded-[2rem] bg-slate-50 px-8 py-10 text-center ring-1 ring-slate-200/80">
+            <p className="text-xl font-semibold tracking-tight text-slate-950">
+              Still have questions?
+            </p>
+            <p className="max-w-md text-sm leading-relaxed text-slate-600 sm:text-base">
+              Send us an email and we'll get back to you.
+            </p>
+
+            <a
+              href="https://mail.google.com/mail/?view=cm&to=raehanathaiya@gmail.com"
+              target="_blank"
+              className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--lydera-primary)] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[var(--lydera-primary)]/25 ring-1 ring-inset ring-white/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--lydera-primary-hover)] hover:shadow-xl hover:shadow-[var(--lydera-primary)]/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lydera-primary)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            >
+              Email us
+              <span
+                className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </a>
           </div>
         </Reveal>
       </div>

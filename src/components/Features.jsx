@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 
+// ── Import asset fitur ──
 import AnotasiDepan from "../assets/features/anotasi/Anotasi_Depan.svg";
 import AnotasiBelakang from "../assets/features/anotasi/Anotasi_Belakang.svg";
 import Quizzer from "../assets/features/quizer/Quizzer.svg";
@@ -8,399 +10,396 @@ import EvaluaizerDepan from "../assets/features/evaluaizer/Evaluaizer_Depan.svg"
 import EvaluaizerBelakang from "../assets/features/evaluaizer/Evaluarize_Belakang.svg";
 import Clarifer from "../assets/features/clarifer/Clarifer.svg";
 
+/* ─────────────────────────────────────────────────────────────
+   CUSTOM HOOK: PARALLAX SCROLL
+   Mockup HP bergerak naik-turun halus saat di-scroll.
+   Mati otomatis kalau pengguna mengaktifkan reduced motion.
+*/
+function useParallax() {
+  const ref = useRef(null);
+  const [offset, setOffset] = useState(0);
 
-/* ── Floating Badges ── */
-function FloatingCard({ type }) {
-  if (type === "annotation") {
-    return (
-      <>
-        {/* Bottom-left: source file badge */}
-        <div className="absolute -left-6 bottom-12 hidden w-44 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--lydera-primary-soft)] text-base">
-              📄
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-slate-900">Module.pdf</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Original document</p>
-            </div>
-          </div>
-        </div>
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduceMotion) return;
 
-        {/* Top-right: accessible badge */}
-        <div className="absolute -right-6 top-12 hidden rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl shadow-slate-950/10 sm:block">
-          <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-50 text-xs text-emerald-600">✓</span>
-            <span className="text-xs font-semibold text-slate-900">Accessible</span>
-          </div>
-        </div>
+    let frame;
+    const handleScroll = () => {
+      if (!ref.current) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = ref.current.getBoundingClientRect();
+        const distance = rect.top + rect.height / 2 - window.innerHeight / 2;
+        // Batasi offset biar gerakannya halus
+        setOffset(Math.max(-18, Math.min(18, distance * 0.035)));
+      });
+    };
 
-        {/* Bottom-right: screen reader badge */}
-        <div className="absolute -right-6 bottom-16 hidden rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Screen Reader</p>
-          <p className="mt-1 text-xs font-semibold text-[var(--lydera-primary)]">Ready ✓</p>
-        </div>
-      </>
-    );
-  }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-  if (type === "quizzer") {
-    return (
-      <>
-        {/* Bottom-right: taxonomy */}
-        <div className="absolute -right-6 bottom-10 hidden w-48 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Bloom's Taxonomy</p>
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-sm font-semibold text-slate-900">Analyze</span>
-            <span className="rounded-full bg-[var(--lydera-primary-soft)] px-2.5 py-1 text-[10px] font-semibold text-[var(--lydera-primary)]">AI</span>
-          </div>
-        </div>
-
-        {/* Top-left: questions generated */}
-        <div className="absolute -left-6 top-14 hidden w-44 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Generated</p>
-          <div className="mt-2 flex items-end gap-1">
-            <span className="text-2xl font-bold text-slate-900">10</span>
-            <span className="mb-0.5 text-xs text-slate-500">questions</span>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (type === "scriber") {
-    return (
-      <>
-        {/* Bottom-left: math keyboard */}
-        <div className="absolute -left-6 bottom-10 hidden w-52 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Math Input</p>
-          <div className="mt-3 grid grid-cols-5 gap-1.5">
-            {["+", "−", "×", "÷", "√", "x²", "=", "(", ")", "π"].map((symbol) => (
-              <span key={symbol} className="flex h-7 items-center justify-center rounded-lg bg-slate-50 text-[11px] font-medium text-slate-600 ring-1 ring-slate-100">
-                {symbol}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Top-right: step counter */}
-        <div className="absolute -right-6 top-14 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Steps</p>
-          <div className="mt-2 flex items-end gap-1">
-            <span className="text-2xl font-bold text-slate-900">4</span>
-            <span className="mb-0.5 text-xs text-slate-500">recorded</span>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (type === "evaluaizer") {
-    return (
-      <>
-        {/* Bottom-left: AI feedback */}
-        <div className="absolute -left-6 bottom-12 hidden w-48 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">AI Feedback</p>
-          <div className="mt-3 flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-600">✓</span>
-            <div>
-              <p className="text-xs font-semibold text-slate-900">Step reviewed</p>
-              <p className="mt-0.5 text-[10px] text-slate-500">Reasoning analyzed</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Top-right: accuracy badge */}
-        <div className="absolute -right-6 top-12 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Accuracy</p>
-          <div className="mt-2 flex items-end gap-1">
-            <span className="text-2xl font-bold text-[var(--lydera-primary)]">92%</span>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (type === "clarifier") {
-    return (
-      <>
-        {/* Bottom-right: source badge */}
-        <div className="absolute -right-6 bottom-10 hidden w-52 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">Source</p>
-          <div className="mt-3 flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--lydera-primary-soft)] text-xs">📄</div>
-            <div>
-              <p className="text-xs font-semibold text-slate-900">Learning Module</p>
-              <p className="mt-1 text-[10px] text-slate-500">Chapter 02 · Verified</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Top-left: response badge */}
-        <div className="absolute -left-6 top-14 hidden rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl shadow-slate-950/10 sm:block">
-          <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[var(--lydera-primary-soft)] text-xs text-[var(--lydera-primary)]">💬</span>
-            <span className="text-xs font-semibold text-slate-900">AI Explained</span>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  return null;
+  return { ref, offset };
 }
 
-/* ── Stat Pill ── */
-function StatPill({ label, value, accent }) {
-  return (
-    <div
-      className={`flex flex-col items-center rounded-2xl px-5 py-3 ${
-        accent
-          ? "bg-[var(--lydera-primary)] text-white"
-          : "bg-white text-slate-900 ring-1 ring-slate-200"
-      }`}
-    >
-      <span className="text-xl font-bold">{value}</span>
-      <span
-        className={`mt-0.5 text-[10px] font-medium uppercase tracking-wide ${
-          accent ? "opacity-80" : "text-slate-500"
-        }`}
-      >
-        {label}
-      </span>
-    </div>
-  );
-}
-
-/* ── Feature Visual ── */
+/* ─────────────────────────────────────────────────────────────
+   FEATURE VISUAL: KOTAK BIRU + MOCKUP HP
+   Kotak biru & mockup HP punya ukuran INDEPENDEN.
+   (Bagian ini sengaja tidak diubah.)
+*/
 function FeatureVisual({ feature }) {
-  const isDouble = !!feature.secondaryImage;
+  const isDouble = Boolean(feature.secondaryImage);
+  const { ref, offset } = useParallax();
 
   return (
     <div
-      className={`relative flex min-h-[520px] items-center justify-center overflow-visible rounded-[2rem] p-8 sm:min-h-[580px] sm:p-12 ${
-        feature.surface === "soft"
-          ? "bg-[var(--lydera-primary-soft)]"
-          : "bg-white ring-1 ring-slate-200"
-      }`}
+      ref={ref}
+      // ── KOTAK BIRU (UKURAN FIX) ──
+      className="relative mx-auto flex w-full items-center justify-center overflow-hidden rounded-[2rem] bg-[var(--lydera-primary)]"
+      style={{
+        // Tinggi kotak FIX — adjust di sini
+        height: isDouble ? "520px" : "460px",
+        // Lebar maksimal kotak FIX — adjust di sini
+        maxWidth: isDouble ? "500px" : "420px",
+        // Shadow halus biar kotak "ngambang"
+        boxShadow: "0 18px 45px rgba(37, 99, 235, 0.18)",
+      }}
     >
-      {/* Background math decorations */}
-      {feature.decor === "math" && (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-          <span className="absolute left-6 top-10 text-5xl font-bold text-blue-100/70">x²</span>
-          <span className="absolute right-8 top-20 text-4xl font-bold text-blue-100/70">√x</span>
-          <span className="absolute bottom-14 left-10 text-3xl font-bold text-blue-100/70">∑</span>
-          <span className="absolute bottom-20 right-10 text-4xl font-bold text-blue-100/70">π</span>
-          <span className="absolute left-1/2 top-8 -translate-x-1/2 text-3xl font-bold text-blue-100/50">∫</span>
-        </div>
-      )}
-
-      {/* Background dot decorations */}
-      {feature.decor === "dots" && (
-        <div className="pointer-events-none absolute inset-0 rounded-[2rem]">
-          {["left-10 top-14", "right-14 top-20", "bottom-18 left-18", "bottom-10 right-10", "left-1/2 top-1/3", "right-1/3 bottom-1/3"].map((pos, i) => (
-            <span
-              key={pos}
-              className={`absolute ${pos} ${
-                i % 2 === 0 ? "h-3 w-3 bg-blue-200/80" : "h-2 w-2 bg-blue-100/80"
-              } rounded-full`}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Soft radial glow behind the phone(s), keeps things feeling premium without going dark */}
+      {/* ── DEKORASI BINTANG ── */}
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl sm:h-96 sm:w-96"
-        style={{ background: "radial-gradient(circle, var(--lydera-primary-soft), transparent 70%)" }}
-      />
+        className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]"
+        aria-hidden="true"
+      >
+        <span className="absolute left-6 top-8 text-xl text-white/20">✦</span>
+        <span className="absolute right-8 top-16 text-3xl text-white/25">
+          ✦
+        </span>
+        <span className="absolute bottom-12 left-10 text-lg text-white/20">
+          ✦
+        </span>
+        <span className="absolute bottom-8 right-8 text-xl text-white/25">
+          ✦
+        </span>
+        <span className="absolute left-1/2 top-8 text-sm text-white/15">✦</span>
+      </div>
 
-      {/* Dual images */}
-      {isDouble ? (
-        <div className="relative h-[440px] w-full max-w-[520px] sm:h-[500px]">
-          {/* Back card — shifted right of center, slightly rotated */}
-          <img
-            src={feature.secondaryImage}
-            alt=""
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 z-0 w-[210px] -translate-x-[25%] -translate-y-1/2 rotate-[7deg] drop-shadow-2xl sm:w-[260px]"
-          />
+      {/* ── MOCKUP HP (UKURAN INDEPENDEN) ── */}
+      <div
+        className="relative z-10 flex items-center justify-center motion-safe:animate-feature-float"
+        style={{
+          // Lebar container mockup FIX — adjust di sini
+          width: isDouble ? "340px" : "280px",
+          // Tinggi container mockup FIX — adjust di sini
+          height: isDouble ? "440px" : "400px",
+          transform: `translateY(${offset}px)`,
+        }}
+      >
+        {isDouble ? (
+          // ── DOUBLE PHONE LAYOUT ──
+          <div className="relative flex h-full w-full items-center justify-center">
+            {/* HP Belakang */}
+            <img
+              src={feature.secondaryImage}
+              alt=""
+              aria-hidden="true"
+              className="relative z-0 w-full scale-[1.1] -translate-x-[-90%] rotate-[5deg] drop-shadow-[0_24px_28px_rgba(15,23,42,0.34)]"
+            />
 
-          {/* Front card — shifted left of center, counter-rotated */}
-          <img
-            src={feature.image}
-            alt={`${feature.title} interface`}
-            className="absolute left-1/2 top-1/2 z-10 w-[210px] -translate-x-[75%] -translate-y-1/2 rotate-[-7deg] drop-shadow-2xl sm:w-[260px]"
-          />
-
-          {feature.floatingType && <FloatingCard type={feature.floatingType} />}
-        </div>
-      ) : (
-        /* Single image */
-        <div className="relative flex w-full flex-col items-center gap-8">
-          {feature.stats && (
-            <div className="flex items-center gap-3">
-              {feature.stats.map((s) => (
-                <StatPill key={s.label} {...s} />
-              ))}
-            </div>
-          )}
-
-          <div className="relative">
+            {/* HP Depan */}
             <img
               src={feature.image}
               alt={`${feature.title} interface`}
-              className="relative z-10 w-[220px] drop-shadow-2xl sm:w-[270px]"
+              className="relative z-10 -ml-[10%] w-full scale-[1.2] translate-x-[-50%] rotate-[-5deg] drop-shadow-[0_28px_32px_rgba(15,23,42,0.4)]"
             />
-            {feature.floatingType && <FloatingCard type={feature.floatingType} />}
           </div>
+        ) : (
+          // ── SINGLE PHONE LAYOUT ──
+          <div className="relative flex h-full w-full flex-col items-center justify-center">
+            {/* Stats pills (khusus Quizzer) */}
+            {feature.stats && (
+              <div className="mb-4 flex items-center gap-2">
+                {feature.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className={`flex min-w-14 flex-col items-center rounded-xl px-2.5 py-1.5 ${
+                      stat.accent
+                        ? "bg-white text-[var(--lydera-primary)]"
+                        : "bg-white/20 text-white"
+                    }`}
+                  >
+                    <span className="text-base font-bold">{stat.value}</span>
+                    <span className="text-[8px] font-medium uppercase tracking-wide opacity-80">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {feature.bottomLabel && (
-            <div className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 ring-1 ring-slate-200">
-              <span className="text-sm font-medium text-slate-700">{feature.bottomLabel}</span>
-            </div>
-          )}
-        </div>
-      )}
+            <img
+              src={feature.image}
+              alt={`${feature.title} interface`}
+              className="w-full scale-[1.3] drop-shadow-[0_28px_32px_rgba(15,23,42,0.4)]"
+              style={{
+                transform: `translate(${feature.imageOffsetX || "0%"}, ${
+                  feature.imageOffsetY || "0%"
+                })`,
+              }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
+/* ─────────────────────────────────────────────────────────────
+   KOMPONEN UTAMA: FEATURES SECTION
+   Layout selang-seling:
+   - Fitur 01, 03, 05 → Teks KIRI, Gambar KANAN
+   - Fitur 02, 04     → Gambar KIRI, Teks KANAN
+*/
 function Features() {
   const features = [
     {
+      id: "annoter",
       number: "01",
       title: "Annoter",
-      description:
-        "Converts an uploaded PDF module to extract text and transform tables, images, and math notations into linear text that can be read aloud by a screen reader using artificial intelligence, which teachers then review and validate before it reaches students.",
+      audience: "For teachers",
       label: "Accessible Content",
+      summary:
+        "Turns an uploaded PDF module into text a screen reader can read aloud, reviewed by teachers before it reaches students.",
+      points: [
+        "Extracts text, tables, images, and math notation",
+        "Converts everything into linear, readable text",
+        "Teachers validate the result before publishing",
+      ],
       image: AnotasiDepan,
       secondaryImage: AnotasiBelakang,
-      floatingType: "annotation",
-      surface: "white",
     },
     {
+      id: "quizzer",
       number: "02",
       title: "Quizzer",
-      description:
-        "Helps teachers create multiple choice exam questions complete with answer keys and justifications directly using artificial intelligence from an uploaded module, with difficulty based on Bloom's Taxonomy and learning outcomes. Teachers can then directly edit any question, answer, or justification before saving and publishing it to students.",
+      audience: "For teachers",
       label: "AI Question Generator",
-      image: Quizzer,
-      floatingType: "quizzer",
-      surface: "soft",
-      stats: [
-        { label: "Questions", value: "10", accent: true },
-        { label: "Difficulty", value: "C4", accent: false },
-        { label: "Auto", value: "AI", accent: false },
+      summary:
+        "Generates multiple-choice questions from an uploaded module, complete with answer keys and justifications.",
+      points: [
+        "Difficulty based on Bloom's Taxonomy and learning outcomes",
+        "Every question, answer, and justification is editable",
+        "Save and publish to students when ready",
       ],
+      image: Quizzer,
+      imageOffsetX: "10%",
     },
     {
+      id: "scriber",
       number: "03",
       title: "Scriber",
-      description:
-        "Provides an accessible digital workspace where students can record, review, and correct each step of their calculations using a custom keyboard that makes mathematical notations easy to input and ensures they are accurately interpreted by screen readers.",
+      audience: "For students",
       label: "Digital Workspace",
+      summary:
+        "An accessible workspace where students write out each step of their calculations.",
+      points: [
+        "Custom keyboard for entering math notation easily",
+        "Notation is interpreted accurately by screen readers",
+        "Record, review, and correct every step",
+      ],
       image: Scriber,
-      floatingType: "scriber",
-      surface: "white",
-      decor: "math",
+      imageOffsetX: "25%",
     },
     {
+      id: "evaluaizer",
       number: "04",
       title: "Evaluaizer",
-      description:
-        "Shows whether students' answers are correct or incorrect and provides a clear justification for each result. When students use Digital Scratchwork, the feature provides deeper analysis of their calculation steps to identify where their reasoning went wrong, rather than only showing the final mistake.",
+      audience: "For students & teachers",
       label: "AI Evaluation",
+      summary:
+        "Shows whether an answer is correct and explains why, down to the step where the reasoning went wrong.",
+      points: [
+        "Clear justification for every result",
+        "Analyzes calculation steps from Digital Scratchwork",
+        "Finds where the mistake started, not just the final error",
+      ],
       image: EvaluaizerDepan,
       secondaryImage: EvaluaizerBelakang,
-      floatingType: "evaluaizer",
-      surface: "soft",
     },
     {
+      id: "clarifier",
       number: "05",
       title: "Clarifier",
-      description:
-        "Helps students understand difficult or unclear sections of their learning modules by providing further explanations and answering follow-up questions. It uses teacher-curated modules as its primary source, with reliable external resources available for additional context when needed.",
+      audience: "For students",
       label: "RAG Learning Assistant",
+      summary:
+        "A study assistant that explains unclear parts of a module and answers follow-up questions.",
+      points: [
+        "Answers from teacher-curated modules first",
+        "Reliable external resources for extra context",
+        "Ask follow-up questions until it makes sense",
+      ],
       image: Clarifer,
-      floatingType: "clarifier",
-      surface: "white",
-      decor: "dots",
+      imageOffsetX: "25%",
     },
   ];
 
   return (
-    <section id="features" className="bg-slate-50 py-20 sm:py-28 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="features"
+      className="relative overflow-hidden bg-slate-50 py-24 sm:py-32"
+      aria-labelledby="features-heading"
+    >
+      {/* Soft background glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -right-32 top-20 h-[380px] w-[380px] rounded-full bg-[var(--lydera-primary)]/[0.06] blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* ── HEADER SECTION ── */}
         <Reveal>
           <div className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-[0.18em] text-[var(--lydera-primary)]">
-              HOW IT WORKS
-            </span>
+            <div className="mb-5 inline-flex items-center gap-2.5">
+              <span
+                className="h-2 w-2 rounded-full bg-[var(--lydera-primary)]"
+                aria-hidden="true"
+              />
+              <span className="text-sm font-medium text-slate-600">
+                How It Works
+              </span>
+            </div>
 
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              One ecosystem. Five ways to make math easier.
+            <h2
+              id="features-heading"
+              className="text-4xl font-bold leading-[1.1] tracking-tighter text-slate-950 sm:text-5xl"
+            >
+              One ecosystem.{" "}
+              <span className="bg-gradient-to-r from-[var(--lydera-primary)] to-sky-500 bg-clip-text text-transparent">
+                Five ways to make math easier.
+              </span>
             </h2>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Setiap fitur Lydera dirancang untuk membantu menghilangkan
-              hambatan dalam proses belajar matematika, mulai dari mengakses
-              materi hingga memahami hasil pembelajaran.
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              Each Lydera feature removes a barrier in learning math, from
+              accessing materials to understanding results.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-16 space-y-24 sm:mt-24 sm:space-y-32 lg:mt-28 lg:space-y-36">
+        {/* ── NAVIGASI RINGKAS (5 chip) ── */}
+        <Reveal delay={100}>
+          <nav aria-label="Jump to feature" className="mt-10">
+            <ul className="flex flex-wrap gap-2.5">
+              {features.map((feature) => (
+                <li key={feature.id}>
+                  <a
+                    href={`#${feature.id}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200 hover:border-[var(--lydera-primary)]/40 hover:text-[var(--lydera-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lydera-primary)]"
+                  >
+                    <span className="text-xs font-bold text-[var(--lydera-primary)]">
+                      {feature.number}
+                    </span>
+                    {feature.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Reveal>
+
+        {/* ── DAFTAR FITUR ── */}
+        <div className="mt-16 space-y-24 sm:mt-24 sm:space-y-32 lg:mt-28 lg:space-y-40">
           {features.map((feature, index) => {
+            // Selang-seling: index ganjil = reversed (gambar kiri)
             const isReversed = index % 2 !== 0;
 
             return (
               <article
-                key={feature.number}
-                className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-20"
+                key={feature.id}
+                id={feature.id}
+                aria-labelledby={`${feature.id}-title`}
+                className="grid scroll-mt-28 items-center gap-12 sm:gap-16 lg:grid-cols-2 lg:gap-20 xl:gap-24"
               >
+                {/* ── KOLOM TEKS ── */}
                 <Reveal
                   direction={isReversed ? "right" : "left"}
                   className={isReversed ? "lg:order-2" : ""}
                 >
                   <div className="max-w-xl">
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span className="text-sm font-semibold text-[var(--lydera-primary)]">
+                    {/* Nomor + label */}
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="text-sm font-bold text-[var(--lydera-primary)]">
                         {feature.number}
                       </span>
-
-                      <span className="h-px w-8 bg-[var(--lydera-primary-soft-hover)]" />
-
-                      <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--lydera-primary)]/70">
+                      <span
+                        className="h-px w-8 bg-[var(--lydera-primary)]/30"
+                        aria-hidden="true"
+                      />
+                      <span className="text-sm font-medium text-slate-600">
                         {feature.label}
                       </span>
                     </div>
 
-                    <h3 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                      {feature.title}
-                    </h3>
-
-                    <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
-                      {feature.description}
-                    </p>
-
-                    <div className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--lydera-primary)] transition-colors hover:text-[var(--lydera-primary-hover)]">
-                      Explore feature
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">
-                        →
+                    {/* Judul + chip peran */}
+                    <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
+                      <h3
+                        id={`${feature.id}-title`}
+                        className="text-3xl font-bold tracking-tighter text-slate-950 sm:text-4xl lg:text-[2.5rem] lg:leading-tight"
+                      >
+                        {feature.title}
+                      </h3>
+                      <span className="inline-flex items-center rounded-full bg-[var(--lydera-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--lydera-primary)]">
+                        {feature.audience}
                       </span>
                     </div>
+
+                    {/* Ringkasan */}
+                    <p className="mt-5 max-w-[34rem] text-base leading-relaxed text-slate-700 sm:text-lg">
+                      {feature.summary}
+                    </p>
+
+                    {/* Poin-poin */}
+                    <ul className="mt-6 space-y-3">
+                      {feature.points.map((point) => (
+                        <li
+                          key={point}
+                          className="flex items-start gap-3 text-sm leading-6 text-slate-600 sm:text-base"
+                        >
+                          <span
+                            className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--lydera-primary-soft)] text-[var(--lydera-primary)]"
+                            aria-hidden="true"
+                          >
+                            <svg
+                              className="h-3 w-3"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={3}
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m4.5 12.75 6 6 9-13.5"
+                              />
+                            </svg>
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </Reveal>
 
+                {/* ── KOLOM MOCKUP HP (KOTAK BIRU) ── */}
                 <Reveal
                   direction={isReversed ? "left" : "right"}
                   delay={100}
-                  className={
-                    isReversed
-                      ? "lg:order-1 lg:justify-self-start"
-                      : "lg:justify-self-end"
-                  }
+                  className={isReversed ? "lg:order-1" : ""}
                 >
                   <FeatureVisual feature={feature} />
                 </Reveal>

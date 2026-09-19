@@ -1,179 +1,184 @@
+import BenefitImage from "../assets/benefits/images.jpg";
 import Reveal from "./Reveal";
 
-function Benefits() {
-  const benefits = [
-    {
-      number: "01",
-      title: "Belajar lebih mandiri",
-      description:
-        "Siswa dapat mengakses materi, mengerjakan latihan, dan mengeksplorasi konsep matematika dengan dukungan teknologi yang dirancang untuk aksesibilitas.",
-    },
-    {
-      number: "02",
-      title: "Materi lebih mudah dipahami",
-      description:
-        "Konten pembelajaran dapat diolah menjadi format yang lebih ramah screen reader sehingga informasi matematika lebih mudah diakses.",
-    },
-    {
-      number: "03",
-      title: "Guru lebih mudah mendampingi",
-      description:
-        "Guru dan pendamping mendapatkan alat untuk membuat soal, mengelola materi, serta memahami perkembangan belajar siswa.",
-    },
-    {
-      number: "04",
-      title: "Feedback yang lebih bermakna",
-      description:
-        "Analisis berbasis AI membantu memberikan evaluasi terhadap proses pengerjaan, bukan hanya melihat jawaban akhir.",
-    },
-  ];
+const benefits = [
+  {
+    title: "Learn independently",
+    description:
+      "Students study, practice, and explore math on their own.",
+    icon: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Content that's easy to follow",
+    description:
+      "Modules become screen-reader-friendly text, so math is easier to access.",
+    icon: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Support for teachers",
+    description:
+      "Create questions, manage modules, and follow each student's progress.",
+    icon: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Feedback that explains",
+    description:
+      "See which step went wrong, not just whether the final answer is right.",
+    icon: (
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
+        />
+      </svg>
+    ),
+  },
+];
 
+function Benefits() {
   return (
-    <section id="benefits" className="bg-white py-20 sm:py-28 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="benefits"
+      className="relative overflow-hidden bg-white py-24 sm:py-32"
+      aria-labelledby="benefits-heading"
+    >
+      {/* Soft background glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -left-32 top-1/3 h-[380px] w-[380px] rounded-full bg-[var(--lydera-primary)]/[0.06] blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
         <Reveal>
           <div className="max-w-3xl">
-            <span className="text-xs font-semibold tracking-[0.18em] text-slate-400">
-              BENEFITS
-            </span>
+            <div className="mb-5 inline-flex items-center gap-2.5">
+              <span
+                className="h-2 w-2 rounded-full bg-[var(--lydera-primary)]"
+                aria-hidden="true"
+              />
+              <span className="text-sm font-medium text-slate-600">
+                Benefits
+              </span>
+            </div>
 
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              More than accessible.
-              <span className="block text-slate-500">
+            <h2
+              id="benefits-heading"
+              className="text-4xl font-bold leading-[1.1] tracking-tighter text-slate-950 sm:text-5xl"
+            >
+              More than accessible.{" "}
+              <span className="bg-gradient-to-r from-[var(--lydera-primary)] to-sky-500 bg-clip-text text-transparent">
                 Designed to empower.
               </span>
             </h2>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Lydera tidak hanya membantu membuat matematika lebih mudah
-              diakses, tetapi juga mendukung siswa dan pendamping sepanjang
-              proses pembelajaran.
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              Lydera makes math easier to access, and supports students and
+              teachers throughout the learning process.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-12 sm:mt-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-24">
+        <div className="mt-14 grid gap-12 sm:mt-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
+          {/* Image (full-bleed) */}
           <Reveal direction="left">
-            <div className="relative overflow-hidden rounded-[2rem] bg-white p-7 sm:p-10">
-              <div className="flex min-h-[390px] flex-col justify-between sm:min-h-[460px]">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm">
-                    LYDERA ECOSYSTEM
-                  </span>
-
-                  <span className="text-xs font-medium text-slate-400">
-                    2026
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-[var(--lydera-primary)] shadow-sm">
-                    LYDERA ECOSYSTEM
-                  </span>
-
-                  <span className="text-xs font-medium text-slate-400">
-                    2026
-                  </span>
-                </div>
-
-                <div className="relative flex flex-1 items-center justify-center">
-                  <div className="absolute h-56 w-56 rounded-full bg-white sm:h-72 sm:w-72" />
-
-                  <div className="relative z-10 w-[220px] rounded-[2rem] border-[6px] border-[var(--lydera-primary-soft)] bg-[var(--lydera-primary-soft)] p-1.5 shadow-2xl shadow-[var(--lydera-primary)/10] sm:w-[250px]">
-                    <div className="overflow-hidden rounded-[1.5rem] bg-[var(--lydera-primary-soft)]">
-                      <div className="px-4 pb-5 pt-10">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <div className="h-2 w-12 rounded-full bg-[var(--lydera-primary)]" />
-                            <div className="mt-2 h-3.5 w-20 rounded-full bg-[var(--lydera-primary)]" />
-                          </div>
-
-                          <div className="h-7 w-7 rounded-full bg-[var(--lydera-primary-soft)]" />
-                        </div>
-
-                        <div className="mt-5 rounded-2xl bg-white p-4 ring-1 ring-slate-100">
-                          <div className="<h-2.5 w-20 rounded-full bg-[var(--lydera-primary)]" />
-
-                          <div className="mt-4 h-20 rounded-xl bg-slate-100">
-                            <div className="mx-auto pt-6 text-center text-2xl font-semibold text-slate-300">
-                              ∑
-                            </div>
-                          </div>
-
-                          <div className="mt-4 flex gap-2">
-                            <div className="h-2.5 flex-1 rounded-full bg-slate-100" />
-                            <div className="h-2.5 w-10 rounded-full bg-slate-200" />
-                          </div>
-                        </div>
-
-                        <div className="mt-3 grid grid-cols-2 gap-2">
-                          <div className="h-12 rounded-xl bg-white ring-1 ring-slate-100" />
-                          <div className="h-12 rounded-xl bg-white ring-1 ring-slate-100" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="absolute -right-2 top-1/2 hidden w-36 -translate-y-1/2 rounded-2xl bg-white p-4 shadow-xl shadow-slate-950/10 sm:block">
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-[10px] font-bold text-white">
-                        AI
-                      </div>
-
-                      <div>
-                        <div className="h-2 w-14 rounded-full bg-slate-900" />
-                        <div className="mt-1.5 h-1.5 w-9 rounded-full bg-slate-200" />
-                      </div>
-                    </div>
-
-                    <div className="mt-4 h-2 w-full rounded-full bg-slate-100">
-                      <div className="h-full w-4/5 rounded-full bg-slate-900" />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Learning without barriers.
-                  </p>
-
-                  <p className="mt-1 text-xs leading-5 text-slate-500">
-                    Technology that adapts to the learner.
-                  </p>
-                </div>
-              </div>
+            <div
+              className="relative overflow-hidden rounded-[2rem] bg-slate-100"
+              style={{
+                // Tinggi gambar FIX — adjust di sini
+                height: "520px",
+                boxShadow: "0 18px 45px rgba(37, 99, 235, 0.12)",
+              }}
+            >
+              <img
+                src={BenefitImage}
+                alt="Lydera learning ecosystem in use"
+                className="h-full w-full object-cover object-center"
+                // Kalau bagian penting gambar terpotong, ubah object-center
+                // jadi object-top / object-bottom / object-left / object-right
+              />
             </div>
           </Reveal>
 
-          <div className="divide-y divide-slate-200 border-y border-slate-200">
+          {/* Benefit list */}
+          <ul className="divide-y divide-slate-200 border-y border-slate-200">
             {benefits.map((benefit, index) => (
-              <Reveal key={benefit.number} delay={index * 100}>
-                <article className="group py-6 first:pt-7 last:pb-7 sm:py-7">
-                  <div className="flex gap-5 sm:gap-6">
-                    <span className="pt-1 text-xs font-semibold text-slate-400">
-                      {benefit.number}
-                    </span>
+              <li key={benefit.title}>
+                <Reveal delay={index * 100}>
+                  <div className="group flex gap-5 py-6 sm:gap-6 sm:py-7">
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--lydera-primary-soft)] text-[var(--lydera-primary)] transition-colors duration-300 group-hover:bg-[var(--lydera-primary)] group-hover:text-white"
+                      aria-hidden="true"
+                    >
+                      {benefit.icon}
+                    </div>
 
                     <div className="flex-1">
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">
-                          {benefit.title}
-                        </h3>
+                      <h3 className="text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">
+                        {benefit.title}
+                      </h3>
 
-                        <span className="shrink-0 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-slate-900">
-                          →
-                        </span>
-                      </div>
-
-                      <p className="mt-3 max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+                      <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
                         {benefit.description}
                       </p>
                     </div>
                   </div>
-                </article>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
