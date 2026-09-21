@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { DeviceMobile, ArrowRight } from "@phosphor-icons/react";
 
 // Ganti dengan link Google Drive kamu
 const DOWNLOAD_URL = "#";
@@ -59,26 +60,13 @@ function FinalCTA() {
                 className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
                 aria-hidden="true"
               >
-                →
+                <ArrowRight size={16} weight="bold" />
               </span>
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
 
             <p className="flex items-center gap-2 text-sm text-white/80">
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-                />
-              </svg>
+              <DeviceMobile size={16} weight="regular" aria-hidden="true" />
               Available for Android
             </p>
           </div>

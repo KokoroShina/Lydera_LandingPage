@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { List, X } from "@phosphor-icons/react";
 import Logo from "../assets/logos/Logos.svg";
 
 function Navbar() {
@@ -171,38 +172,9 @@ function Navbar() {
           aria-controls="mobile-navigation"
         >
           {isMenuOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 6l12 12" />
-              <path d="M18 6L6 18" />
-            </svg>
+            <X size={20} weight="bold" aria-hidden="true" />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M4 6h16" />
-              <path d="M4 12h16" />
-              <path d="M4 18h16" />
-            </svg>
+            <List size={20} weight="bold" aria-hidden="true" />
           )}
         </button>
       </div>

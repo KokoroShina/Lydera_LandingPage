@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Check } from "@phosphor-icons/react";
 import Reveal from "./Reveal";
 
 // ── Import asset fitur ──
@@ -374,19 +375,7 @@ function Features() {
                             className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--lydera-primary-soft)] text-[var(--lydera-primary)]"
                             aria-hidden="true"
                           >
-                            <svg
-                              className="h-3 w-3"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={3}
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m4.5 12.75 6 6 9-13.5"
-                              />
-                            </svg>
+                            <Check size={12} weight="bold" />
                           </span>
                           <span>{point}</span>
                         </li>

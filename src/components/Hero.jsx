@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { ArrowRight, Play } from "@phosphor-icons/react";
 import HeroFront from "../assets/hero/Hero_1.svg";
 import HeroBack from "../assets/hero/Hero_2.svg";
 
@@ -69,7 +70,7 @@ function Hero() {
                   className="transition-transform duration-200 group-hover:translate-x-1"
                   aria-hidden="true"
                 >
-                  →
+                  <ArrowRight size={16} weight="bold" />
                 </span>
               </a>
 
@@ -78,10 +79,10 @@ function Hero() {
                 className="group inline-flex items-center gap-3 text-sm font-semibold text-slate-800 transition-colors duration-200 hover:text-[var(--lydera-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--lydera-primary)]"
               >
                 <span
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[10px] text-[var(--lydera-primary)] shadow-sm transition-all duration-200 group-hover:border-[var(--lydera-primary)]/40 group-hover:shadow-md"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--lydera-primary)] shadow-sm transition-all duration-200 group-hover:border-[var(--lydera-primary)]/40 group-hover:shadow-md"
                   aria-hidden="true"
                 >
-                  ▶
+                  <Play size={14} weight="fill" />
                 </span>
 
                 See how it works
@@ -150,4 +151,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default Hero;x
