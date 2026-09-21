@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../assets/logos/Logos.svg";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isOnDark, setIsOnDark] = useState(false); // <- state baru
+  const [isOnBlue, setIsOnBlue] = useState(false);
 
   const navItems = [
     { label: "About Us", href: "#about" },
@@ -16,14 +16,10 @@ function Navbar() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setIsMenuOpen(false);
-      }
+      if (event.key === "Escape") setIsMenuOpen(false);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -36,61 +32,102 @@ function Navbar() {
     };
   }, []);
 
-  // Deteksi apakah section #cta sedang terlihat
+  // Navbar berubah jadi biru saat #cta atau <footer> berada di bawah navbar
   useEffect(() => {
-    const ctaSection = document.getElementById("cta");
-    if (!ctaSection) return;
+    const targets = [
+      document.getElementById("cta"),
+      document.querySelector("footer"),
+    ].filter(Boolean);
+
+    if (targets.length === 0) return;
+
+    const visible = new Set();
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Aktifkan dark mode navbar kalau section cta masuk viewport
-        // rootMargin negatif atas biar transisi terjadi pas navbar "menyentuh" section
-        setIsOnDark(entry.isIntersecting && entry.intersectionRatio > 0.15);
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        setIsOnBlue(visible.size > 0);
       },
       {
-        rootMargin: "-80px 0px 0px 0px", // offset tinggi navbar
-        threshold: [0, 0.15, 0.5, 1],
+        // Hanya strip setinggi navbar (80px) di paling atas layar yang dipantau
+        rootMargin: "0px 0px -100% 0px",
+        threshold: 0,
       }
     );
 
-    observer.observe(ctaSection);
+    // rootMargin -100% bawah membuat root jadi garis tipis di atas layar,
+    // jadi kita beri tinggi navbar lewat rootMargin atas-bawah yang benar:
+    observer.disconnect();
+    const navHeightObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        setIsOnBlue(visible.size > 0);
+      },
+      {
+        rootMargin: `0px 0px -${Math.max(window.innerHeight - 80, 0)}px 0px`,
+        threshold: 0,
+      }
+    );
 
-    return () => observer.disconnect();
+    targets.forEach((el) => navHeightObserver.observe(el));
+
+    return () => navHeightObserver.disconnect();
   }, []);
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Kelas dinamis berdasarkan isOnDark
-  const headerClasses = isOnDark
-    ? "border-white/10 bg-slate-950/90 shadow-lg backdrop-blur-md"
+  // Tetap biru saat menu mobile terbuka di atas blok biru, agar tidak berkedip
+  const headerClasses = isOnBlue
+    ? "border-white/15 bg-[var(--lydera-primary)] shadow-none"
     : isScrolled
     ? "border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md"
     : "border-transparent bg-white/80 backdrop-blur-md";
 
-  const brandTextClass = isOnDark ? "text-white" : "text-slate-900";
-  const navLinkClass = isOnDark
-    ? "text-slate-300 hover:text-[var(--lydera-primary)]"
+  const brandTextClass = isOnBlue ? "text-white" : "text-slate-900";
+
+  const navLinkClass = isOnBlue
+    ? "text-white/85 hover:text-white"
     : "text-slate-600 hover:text-[var(--lydera-primary)]";
+
+  const underlineClass = isOnBlue
+    ? "after:bg-white"
+    : "after:bg-[var(--lydera-primary)]";
+
+  const ctaClass = isOnBlue
+    ? "bg-white text-[var(--lydera-primary)] hover:bg-white/90"
+    : "bg-[var(--lydera-primary)] text-white hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)]/10";
+
+  const focusRing = isOnBlue
+    ? "focus-visible:outline-white"
+    : "focus-visible:outline-[var(--lydera-primary)]";
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${headerClasses}`}
+      className={`sticky top-0 z-50 w-full border-b transition-colors duration-300 motion-reduce:transition-none ${headerClasses}`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo + Brand */}
         <a
           href="#"
           onClick={closeMenu}
-          className="flex items-center"
-          aria-label="Lydera - Home"
+          className={`flex items-center gap-1 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${focusRing}`}
+          aria-label="Lydera - Back to top"
         >
           <img
             src={Logo}
-            alt="Lydera Logo"
-            className="h-20 w-20 object-contain"
+            alt=""
+            className={`h-14 w-14 object-contain transition-[filter] duration-300 motion-reduce:transition-none ${
+              isOnBlue ? "brightness-0 invert" : ""
+            }`}
           />
           <span
-            className={`text-xl font-bold tracking-tight transition-colors duration-300 ${brandTextClass}`}
+            className={`text-xl font-bold tracking-tighter transition-colors duration-300 motion-reduce:transition-none ${brandTextClass}`}
           >
             Lydera
           </span>
@@ -105,7 +142,7 @@ function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className={`relative text-sm font-medium transition-colors duration-300 after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-[var(--lydera-primary)] after:transition-all after:duration-300 hover:after:w-full ${navLinkClass}`}
+              className={`relative rounded text-sm font-medium transition-colors duration-300 after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:transition-all after:duration-300 hover:after:w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none ${navLinkClass} ${underlineClass} ${focusRing}`}
             >
               {item.label}
             </a>
@@ -115,21 +152,21 @@ function Navbar() {
         {/* Desktop CTA */}
         <a
           href="#cta"
-          className="hidden rounded-full bg-[var(--lydera-primary)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)/10] lg:inline-flex"
+          className={`hidden rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none lg:inline-flex ${ctaClass} ${focusRing}`}
         >
-          Coba Sekarang
+          Try Lydera
         </a>
 
         {/* Mobile Menu Toggle */}
         <button
           type="button"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors lg:hidden ${
-            isOnDark
-              ? "border-white/20 text-white hover:bg-white/10"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none lg:hidden ${focusRing} ${
+            isOnBlue
+              ? "border-white/30 text-white hover:bg-white/10"
               : "border-slate-200 text-slate-900 hover:bg-slate-100"
           }`}
-          aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
         >
@@ -173,9 +210,10 @@ function Navbar() {
       {/* Mobile Navigation */}
       <div
         id="mobile-navigation"
-        className={`overflow-hidden border-t transition-all duration-300 lg:hidden ${
-          isOnDark
-            ? "border-white/10 bg-slate-950"
+        inert={isMenuOpen ? undefined : ""}
+        className={`overflow-hidden border-t transition-all duration-300 motion-reduce:transition-none lg:hidden ${
+          isOnBlue
+            ? "border-white/15 bg-[var(--lydera-primary)]"
             : "border-slate-100 bg-white"
         } ${
           isMenuOpen
@@ -193,10 +231,10 @@ function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className={`border-b py-3.5 text-sm font-medium transition-colors duration-200 hover:text-[var(--lydera-primary)] ${
-                  isOnDark
-                    ? "border-white/10 text-slate-300"
-                    : "border-slate-100 text-slate-700"
+                className={`border-b py-3.5 text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none ${focusRing} ${
+                  isOnBlue
+                    ? "border-white/15 text-white/90 hover:text-white"
+                    : "border-slate-100 text-slate-700 hover:text-[var(--lydera-primary)]"
                 }`}
               >
                 {item.label}
@@ -206,9 +244,13 @@ function Navbar() {
             <a
               href="#cta"
               onClick={closeMenu}
-              className="mt-5 inline-flex items-center justify-center rounded-full bg-[var(--lydera-primary)] px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)]"
+              className={`mt-5 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none ${focusRing} ${
+                isOnBlue
+                  ? "bg-white text-[var(--lydera-primary)] hover:bg-white/90"
+                  : "bg-[var(--lydera-primary)] text-white hover:bg-[var(--lydera-primary-hover)]"
+              }`}
             >
-              Coba Sekarang
+              Try Lydera
             </a>
           </div>
         </nav>

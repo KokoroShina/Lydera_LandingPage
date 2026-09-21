@@ -1,106 +1,103 @@
-import Reveal from "./Reveal";
+// Samakan path ini dengan import logo di Navbar
+import LyderaLogo from "../assets/logos/logos.svg";
 
 function Footer() {
   const links = [
     { label: "About Us", href: "#about" },
     { label: "Users", href: "#users" },
     { label: "How it Works", href: "#features" },
-    { label: "Benefits", href: "#benefits" },
+    { label: "Benefit", href: "#benefits" },
+    { label: "Testimonial", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
   ];
 
   return (
-    <footer className="bg-slate-950 text-white">
+    <footer className="border-t border-white/15 bg-[var(--lydera-primary)] text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <Reveal>
-          <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
-            <div className="max-w-sm">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2.5"
-                aria-label="Lydera - Home"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-lg font-bold text-slate-950">
-                  L
-                </div>
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+          {/* Brand */}
+          <div className="max-w-sm">
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              aria-label="Lydera - Back to top"
+            >
+              <img
+                src={LyderaLogo}
+                alt=""
+                className="h-9 w-auto brightness-0 invert"
+              />
+              <span className="text-xl font-bold tracking-tighter">
+                Lydera
+              </span>
+            </a>
 
-                <span className="text-xl font-bold tracking-tight">
-                  Lydera
-                </span>
-              </a>
-
-              <p className="mt-5 text-sm leading-7 text-slate-400">
-                Inclusive AI learning ecosystem yang membantu membuat
-                pembelajaran matematika lebih mudah diakses bagi setiap siswa.
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold tracking-[0.16em] text-slate-500">
-                EXPLORE
-              </p>
-
-              <nav className="mt-5 flex flex-col items-start gap-3">
-                {links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-sm text-slate-400 transition-colors duration-200 hover:text-[var(--lydera-primary)]"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold tracking-[0.16em] text-slate-500">
-                GET STARTED
-              </p>
-
-              <p className="mt-5 max-w-xs text-sm leading-6 text-slate-400">
-                Ingin mengetahui lebih lanjut tentang Lydera atau menjadi
-                bagian dari perjalanan kami?
-              </p>
-
-              <a
-                href="#cta"
-                className="mt-5 inline-flex items-center rounded-full bg-[var(--lydera-primary)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--lydera-primary-hover)]"
-              >
-                Coba Sekarang
-                <span className="ml-2">→</span>
-              </a>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={150}>
-          <div className="mt-16 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-slate-500">
-              © 2026 Lydera. All rights reserved.
+            <p className="mt-5 text-sm leading-relaxed text-white/85">
+              An inclusive AI learning ecosystem that makes math easier to
+              access for every student.
             </p>
+          </div>
 
-            <div className="flex items-center gap-5">
+          {/* Explore */}
+          <div>
+            <p className="text-sm font-semibold text-white">Explore</p>
+
+            <nav
+              aria-label="Footer"
+              className="mt-5 flex flex-col items-start gap-3"
+            >
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="rounded text-sm text-white/85 transition-colors duration-200 hover:text-white hover:underline hover:underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-sm font-semibold text-white">Contact</p>
+
+            <div className="mt-5 flex flex-col items-start gap-3">
               <a
-                href="#"
-                className="text-xs text-slate-500 transition-colors duration-200 hover:text-white"
+                href="mailto:raehanathaiya@gmail.com"
+                className="inline-flex items-center gap-2.5 rounded text-sm text-white/85 transition-colors duration-200 hover:text-white hover:underline hover:underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
               >
-                Privacy
+                <svg
+                  className="h-4 w-4 shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                  />
+                </svg>
+                raehanathaiya@gmail.com
               </a>
 
-              <a
-                href="#"
-                className="text-xs text-slate-500 transition-colors duration-200 hover:text-white"
-              >
-                Terms
-              </a>
+              
             </div>
           </div>
-        </Reveal>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-16 border-t border-white/15 pt-7">
+          <p className="text-xs text-white/75">
+            © 2026 Lydera. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
 }
 
 export default Footer;
-

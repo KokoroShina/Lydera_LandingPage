@@ -1,58 +1,89 @@
 import Reveal from "./Reveal";
 
+// Ganti dengan link Google Drive kamu
+const DOWNLOAD_URL = "#";
+
 function FinalCTA() {
   return (
-    <section id="cta" className="bg-slate-950 px-6 py-24 sm:py-32">
-      <div className="mx-auto max-w-5xl text-center">
-        <Reveal>
-          <div>
-            <span className="text-xs font-semibold tracking-[0.18em] text-slate-400">
-              START WITH LYDERA
-            </span>
-
-            <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Buka Pintu Matematika
-              <span className="block text-slate-400">
-                Tanpa Batas Bersama Lydera.
-              </span>
-            </h2>
-
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
-              Mari membangun pengalaman belajar matematika yang lebih inklusif,
-              mudah diakses, dan dapat membantu setiap siswa berkembang sesuai
-              potensinya.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={150}>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--lydera-primary)] px-7 py-3.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)]/20"
-            >
-              Coba Sekarang
-            </a>
-
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-[var(--lydera-primary)] transition-all duration-200 hover:underline hover:underline-offset-4"
-            >
-              Kenali Lydera
-              <span className="ml-2">↑</span>
-            </a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={250}>
-          <div className="mx-auto mt-16 max-w-xl border-t border-white/10 pt-6">
-            <p className="text-xs leading-5 text-slate-500">
-              Inclusive technology. Meaningful learning. A more accessible
-              future.
-            </p>
-          </div>
-        </Reveal>
+    <section
+      id="cta"
+      className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-[var(--lydera-primary)] px-6 py-24 text-center sm:py-32"
+      aria-labelledby="cta-heading"
+    >
+      {/* Decorative stars (same language as the Hero mockup box) */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="absolute left-[8%] top-[14%] text-xl text-white/20">✦</span>
+        <span className="absolute right-[10%] top-[18%] text-3xl text-white/25">✦</span>
+        <span className="absolute bottom-[16%] left-[14%] text-lg text-white/20">✦</span>
+        <span className="absolute bottom-[14%] right-[8%] text-xl text-white/25">✦</span>
+        <span className="absolute left-1/2 top-[10%] text-sm text-white/15">✦</span>
       </div>
+
+      <Reveal>
+        <div className="relative mx-auto max-w-3xl">
+          <div className="mb-6 inline-flex items-center gap-2.5">
+            <span
+              className="h-2 w-2 rounded-full bg-white"
+              aria-hidden="true"
+            />
+            <span className="text-sm font-medium text-white/90">
+              Start with Lydera
+            </span>
+          </div>
+
+          <h2
+            id="cta-heading"
+            className="text-4xl font-bold leading-[1.05] tracking-tighter text-white sm:text-5xl lg:text-7xl"
+          >
+            Open the door to math,
+            <span className="block">without limits.</span>
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+            Let's build a more inclusive, accessible way to learn math, where
+            every student can grow to their potential.
+          </p>
+
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <a
+              href={DOWNLOAD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-[var(--lydera-primary)] shadow-lg shadow-slate-950/15 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-slate-950/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            >
+              Try Lydera
+              <span
+                className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
+                aria-hidden="true"
+              >
+                →
+              </span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+
+            <p className="flex items-center gap-2 text-sm text-white/80">
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+                />
+              </svg>
+              Available for Android
+            </p>
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

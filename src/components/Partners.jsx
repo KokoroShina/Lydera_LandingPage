@@ -21,9 +21,9 @@ function Partners() {
           <div className="mb-10 text-center sm:mb-12">
             <h2
               id="partners-heading"
-              className="text-sm font-medium text-slate-500"
+              className="text-2xl font-semibold text-slate-850"
             >
-              In collaboration with
+              Partner With
             </h2>
           </div>
         </Reveal>
@@ -54,7 +54,7 @@ function Partners() {
                     <img
                       src={partner.logo}
                       alt={isDuplicate ? "" : `${partner.name} logo`}
-                      className="h-10 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-40"
+                      className="h-10 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-23"
                     />
                   </li>
                 );
