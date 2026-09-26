@@ -48,28 +48,11 @@ function FinalCTA() {
             every student can grow to their potential.
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4">
-            <a
-              href={DOWNLOAD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-[var(--lydera-primary)] shadow-lg shadow-slate-950/15 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-slate-950/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-            >
-              Try Lydera
-              <span
-                className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
-                aria-hidden="true"
-              >
-                <ArrowRight size={16} weight="bold" />
-              </span>
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
+        <div className="mt-10 flex flex-col items-center gap-4">
+  {/* CTA "Try Lydera" disembunyikan sementara, belum siap */}
 
-            <p className="flex items-center gap-2 text-sm text-white/80">
-              <DeviceMobile size={16} weight="regular" aria-hidden="true" />
-              Available for Android
-            </p>
-          </div>
+  
+</div>
         </div>
       </Reveal>
     </section>

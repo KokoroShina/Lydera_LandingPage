@@ -153,7 +153,9 @@ function Navbar() {
         {/* Desktop CTA */}
         <a
           href="#cta"
-          className={`hidden rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none lg:inline-flex ${ctaClass} ${focusRing}`}
+          aria-hidden="true"
+          tabIndex={-1}
+          className="hidden invisible rounded-full px-5 py-2.5 text-sm font-semibold lg:inline-flex"
         >
           Try Lydera
         </a>
