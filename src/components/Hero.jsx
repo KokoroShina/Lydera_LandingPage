@@ -151,4 +151,4 @@ function Hero() {
   );
 }
 
-export default Hero;x
+export default Hero;

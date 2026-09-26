@@ -1,5 +1,5 @@
 // Samakan path ini dengan import logo di Navbar
-import LyderaLogo from "../assets/logos/logos.svg";
+import LyderaLogo from "../assets/logos/Logos.svg";
 import { EnvelopeSimple } from "@phosphor-icons/react";
 
 function Footer() {
