@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { ArrowRight, Play } from "@phosphor-icons/react";
+import { ArrowDown } from "@phosphor-icons/react";
 import HeroFront from "../assets/hero/Hero_1.svg";
 import HeroBack from "../assets/hero/Hero_2.svg";
 
@@ -31,17 +31,7 @@ function Hero() {
         {/* Text Column (Left) */}
         <Reveal direction="left">
           <div className="max-w-xl">
-            {/* Tiny eyebrow line */}
-            <div className="mb-6 inline-flex items-center gap-2.5">
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-
-              <span className="text-sm font-medium text-slate-600">
-                Built for visually impaired students
-              </span>
-            </div>
+          
 
             <h1
               id="hero-heading"
@@ -60,29 +50,26 @@ function Hero() {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-  {/* CTA "Try Lydera" disembunyikan sementara, belum siap */}
-
-  <a
-    href="#features"
-    className="group inline-flex items-center gap-3 text-sm font-semibold text-slate-800 transition-colors duration-200 hover:text-[var(--lydera-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--lydera-primary)]"
-  >
-    <span
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--lydera-primary)] shadow-sm transition-all duration-200 group-hover:border-[var(--lydera-primary)]/40 group-hover:shadow-md"
-      aria-hidden="true"
-    >
-      <Play size={14} weight="fill" />
-    </span>
-
-    See how it works
-  </a>
-</div>
+              <a
+                href="#features"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-[var(--lydera-primary)] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--lydera-primary-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--lydera-primary)] motion-reduce:transition-none"
+              >
+                See how it works
+                <ArrowDown
+                  size={16}
+                  weight="bold"
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none"
+                />
+              </a>
+            </div>
           </div>
         </Reveal>
 
         {/* Phone Mockup Column (Right) */}
         <Reveal direction="right" delay={150}>
           <div
-            className="relative mx-auto flex items-center justify-center overflow-hidden rounded-[2rem] bg-[var(--lydera-primary)]"
+            className="relative mx-auto flex items-center justify-center overflow-hidden rounded-[2rem] bg-[var(--lydera-primary)] lg:mr-0"
             style={{
               height: "560px",
               maxWidth: "480px",
@@ -117,18 +104,19 @@ function Hero() {
               }}
             >
               <div className="relative flex h-full w-full items-center justify-center">
-                {/* Back phone */}
+                {/* Back phone (dekoratif, tidak perlu dibacakan screen reader) */}
                 <img
                   src={HeroBack}
-                  alt="Lydera app screen on the back phone"
-                  className="relative z-0 w-full scale-[1.3] -translate-x-[-80%] rotate-[0deg] drop-shadow-[0_24px_30px_rgba(15,23,42,0.34)]"
+                  alt=""
+                  aria-hidden="true"
+                  className="relative z-0 w-full translate-x-[80%] scale-[1.3] rotate-[0deg] drop-shadow-[0_24px_30px_rgba(15,23,42,0.34)]"
                 />
 
                 {/* Front phone */}
                 <img
                   src={HeroFront}
-                  alt="Lydera app dashboard on the front phone"
-                  className="relative z-10 -ml-[37%] w-full scale-[1.3] translate-x-[-20%] rotate-[0deg] drop-shadow-[0_28px_36px_rgba(15,23,42,0.4)]"
+                  alt="Lydera app dashboard showing modules and exams"
+                  className="relative z-10 -ml-[37%] w-full translate-x-[-20%] scale-[1.3] rotate-[0deg] drop-shadow-[0_28px_36px_rgba(15,23,42,0.4)]"
                 />
               </div>
             </div>

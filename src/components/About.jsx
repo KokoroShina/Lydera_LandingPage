@@ -129,32 +129,16 @@ function About() {
           </div>
         </div>
 
-        {/* Stats */}
-        <Reveal delay={150}>
-          <dl className="mt-14 grid gap-8 border-t border-slate-200 pt-10 sm:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="sr-only">{stat.label}</dt>
-                <dd>
-                  <span className="block text-4xl font-bold tracking-tighter text-slate-950 sm:text-5xl">
-                    {stat.value}
-                  </span>
-                  <span className="mt-2 block text-sm text-slate-600">
-                    {stat.label}
-                  </span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
+       <Reveal delay={150}>
+           <div className="mt-16 rounded-[2rem] bg-[var(--lydera-primary-soft)] px-8 py-12 text-center sm:px-16 sm:py-16">
+    <p className="mx-auto max-w-3xl text-2xl font-semibold leading-snug tracking-tight text-slate-950 sm:text-4xl">
+      Because learning math shouldn't be limited by how someone{" "}
+      <span className="text-[var(--lydera-primary)]">sees the world.</span>
+    </p>
+  </div>
+       </Reveal>
 
-        {/* Closing line */}
-        <Reveal delay={200}>
-          <p className="mt-16 max-w-3xl text-xl font-medium leading-relaxed tracking-tight text-slate-800 sm:text-2xl">
-            Because learning math shouldn't be limited by how someone sees the
-            world.
-          </p>
-        </Reveal>
+        
       </div>
     </section>
   );

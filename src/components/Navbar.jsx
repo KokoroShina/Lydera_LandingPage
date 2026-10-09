@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { List, X } from "@phosphor-icons/react";
+import { List, X, EnvelopeSimple, ArrowRight } from "@phosphor-icons/react";
 import Logo from "../assets/logos/Logos.svg";
+
+// ganti dengan email tim yang beneran dipantau
+const CONTACT_EMAIL = "tim@lydera.com";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,37 +56,18 @@ function Navbar() {
         setIsOnBlue(visible.size > 0);
       },
       {
-        // Hanya strip setinggi navbar (80px) di paling atas layar yang dipantau
-        rootMargin: "0px 0px -100% 0px",
-        threshold: 0,
-      }
-    );
-
-    // rootMargin -100% bawah membuat root jadi garis tipis di atas layar,
-    // jadi kita beri tinggi navbar lewat rootMargin atas-bawah yang benar:
-    observer.disconnect();
-    const navHeightObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) visible.add(entry.target);
-          else visible.delete(entry.target);
-        });
-        setIsOnBlue(visible.size > 0);
-      },
-      {
         rootMargin: `0px 0px -${Math.max(window.innerHeight - 80, 0)}px 0px`,
         threshold: 0,
       }
     );
 
-    targets.forEach((el) => navHeightObserver.observe(el));
+    targets.forEach((el) => observer.observe(el));
 
-    return () => navHeightObserver.disconnect();
+    return () => observer.disconnect();
   }, []);
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Tetap biru saat menu mobile terbuka di atas blok biru, agar tidak berkedip
   const headerClasses = isOnBlue
     ? "border-white/15 bg-[var(--lydera-primary)] shadow-none"
     : isScrolled
@@ -99,10 +83,6 @@ function Navbar() {
   const underlineClass = isOnBlue
     ? "after:bg-white"
     : "after:bg-[var(--lydera-primary)]";
-
-  const ctaClass = isOnBlue
-    ? "bg-white text-[var(--lydera-primary)] hover:bg-white/90"
-    : "bg-[var(--lydera-primary)] text-white hover:bg-[var(--lydera-primary-hover)] hover:shadow-lg hover:shadow-[var(--lydera-primary)]/10";
 
   const focusRing = isOnBlue
     ? "focus-visible:outline-white"
@@ -149,16 +129,6 @@ function Navbar() {
             </a>
           ))}
         </nav>
-
-        {/* Desktop CTA */}
-        <a
-          href="#cta"
-          aria-hidden="true"
-          tabIndex={-1}
-          className="hidden invisible rounded-full px-5 py-2.5 text-sm font-semibold lg:inline-flex"
-        >
-          Try Lydera
-        </a>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -215,17 +185,33 @@ function Navbar() {
               </a>
             ))}
 
-            <a
-              href="#cta"
-              onClick={closeMenu}
-              className={`mt-5 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none ${focusRing} ${
-                isOnBlue
-                  ? "bg-white text-[var(--lydera-primary)] hover:bg-white/90"
-                  : "bg-[var(--lydera-primary)] text-white hover:bg-[var(--lydera-primary-hover)]"
-              }`}
-            >
-              Try Lydera
-            </a>
+            <div className="mt-10 flex flex-col items-center gap-4">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className={`group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none ${
+                  isOnBlue
+                    ? "bg-white text-[var(--lydera-primary)] hover:bg-white/90 focus-visible:outline-white"
+                    : "bg-[var(--lydera-primary)] text-white hover:bg-[var(--lydera-primary-hover)] focus-visible:outline-[var(--lydera-primary)]"
+                }`}
+              >
+                <EnvelopeSimple size={18} weight="regular" aria-hidden="true" />
+                Contact the team
+                <ArrowRight
+                  size={16}
+                  weight="bold"
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
+                />
+              </a>
+
+              <p
+                className={`text-sm ${
+                  isOnBlue ? "text-white/70" : "text-slate-500"
+                }`}
+              >
+                {CONTACT_EMAIL}
+              </p>
+            </div>
           </div>
         </nav>
       </div>
